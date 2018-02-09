@@ -1,6 +1,7 @@
 package usecase_test
 
 import (
+	"errors"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -29,6 +30,29 @@ func TestGetEpisodeByName(t *testing.T) {
 	// Assert
 	assert.Nil(t, err)
 	assert.Equal(t, episode, result)
+	repository.AssertExpectations(t)
+}
+
+func TestGetEpisodeByNameError(t *testing.T) {
+	// Arrange
+	t.Parallel()
+	error := errors.New("Unable to get episode by name")
+	episodeName := "Anasazi"
+
+	repository := &repositoryMock.Episode{}
+	repository.On(
+		"GetEpisodeByName",
+		episodeName,
+	).Return(&episodeDomain.Episode{}, error)
+
+	interactor := usecase.NewEpisodeInteractor(repository)
+
+	// Act
+	result, err := interactor.GetEpisodeByName(episodeName)
+
+	// Assert
+	assert.Nil(t, result)
+	assert.Equal(t, "Unable to fetch episode data: "+error.Error(), err.Error())
 	repository.AssertExpectations(t)
 }
 
