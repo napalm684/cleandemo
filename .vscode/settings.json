@@ -5,6 +5,7 @@
         "**/.hg": true,
         "**/CVS": true,
         "**/.DS_Store": true,
-        "debug": true
+        "debug": true,
+        "**/*/debug.test": true
     }
 }

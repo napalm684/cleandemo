@@ -5,7 +5,6 @@ import (
 	"net/http"
 	"strings"
 
-	episodeDomain "github.com/napalm684/cleandemo/domain/episode"
 	"github.com/napalm684/cleandemo/usecase"
 )
 
@@ -28,16 +27,9 @@ func (handler *EpisodeHandler) GetEpisodeByName(w http.ResponseWriter, r *http.R
 
 	if err != nil {
 		http.Error(w, "Error retrieving episode details", http.StatusInternalServerError)
+		return
 	}
 
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(episode)
-}
-
-func generateDomainEpisode(name string, season int, episode int) *episodeDomain.Episode {
-	return &episodeDomain.Episode{
-		Name:    name,
-		Season:  season,
-		Episode: episode,
-	}
 }
