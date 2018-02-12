@@ -6,6 +6,7 @@
         "**/CVS": true,
         "**/.DS_Store": true,
         "debug": true,
-        "**/*/debug.test": true
+        "**/*/debug.test": true,
+        "main": true
     }
 }

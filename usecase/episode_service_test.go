@@ -16,13 +16,13 @@ func TestGetEpisodeByName(t *testing.T) {
 	t.Parallel()
 	episode := generateDomainEpisode("Kitten", 11, 6)
 
-	repository := &repositoryMock.Episode{}
+	repository := &repositoryMock.EpisodeRepository{}
 	repository.On(
 		"GetEpisodeByName",
 		episode.Name,
 	).Return(episode, nil)
 
-	interactor := usecase.NewEpisodeInteractor(repository)
+	interactor := usecase.NewEpisodeService(repository)
 
 	// Act
 	result, err := interactor.GetEpisodeByName(episode.Name)
@@ -39,13 +39,13 @@ func TestGetEpisodeByNameError(t *testing.T) {
 	error := errors.New("Unable to get episode by name")
 	episodeName := "Anasazi"
 
-	repository := &repositoryMock.Episode{}
+	repository := &repositoryMock.EpisodeRepository{}
 	repository.On(
 		"GetEpisodeByName",
 		episodeName,
 	).Return(&episodeDomain.Episode{}, error)
 
-	interactor := usecase.NewEpisodeInteractor(repository)
+	interactor := usecase.NewEpisodeService(repository)
 
 	// Act
 	result, err := interactor.GetEpisodeByName(episodeName)

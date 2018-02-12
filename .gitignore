@@ -16,3 +16,5 @@ debug
 
 # Custom Stuff
 notes.txt
+*.tmp
+main

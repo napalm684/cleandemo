@@ -11,8 +11,8 @@ import (
 
 func main() {
 	repository := inmemRepo.NewEpisodeRepository(generateInMemoryData())
-	episodeInteractor := usecase.NewEpisodeInteractor(repository)
-	episodeHandler := handlers.NewEpisodeHandler(*episodeInteractor)
+	episodeService := usecase.NewEpisodeService(repository)
+	episodeHandler := handlers.NewEpisodeHandler(*episodeService)
 
 	http.HandleFunc("/episodes/", episodeHandler.GetEpisodeByName)
 	http.ListenAndServe(":8888", nil)
