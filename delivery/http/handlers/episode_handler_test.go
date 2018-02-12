@@ -26,13 +26,13 @@ func TestEpisodeHandlerGetEpisodeByName(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	repository := &repositoryMock.Episode{}
+	repository := &repositoryMock.EpisodeRepository{}
 	repository.On(
 		"GetEpisodeByName",
 		episode.Name,
 	).Return(episode, nil)
 
-	interactor := usecase.NewEpisodeInteractor(repository)
+	interactor := usecase.NewEpisodeService(repository)
 	episodeHandler := handlers.NewEpisodeHandler(*interactor)
 	handler := http.HandlerFunc(episodeHandler.GetEpisodeByName)
 
@@ -57,13 +57,13 @@ func TestEpisodeHandlerGetEpisodeByNameError(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	repository := &repositoryMock.Episode{}
+	repository := &repositoryMock.EpisodeRepository{}
 	repository.On(
 		"GetEpisodeByName",
 		episodeName,
 	).Return(&episodeDomain.Episode{}, error)
 
-	interactor := usecase.NewEpisodeInteractor(repository)
+	interactor := usecase.NewEpisodeService(repository)
 	episodeHandler := handlers.NewEpisodeHandler(*interactor)
 	handler := http.HandlerFunc(episodeHandler.GetEpisodeByName)
 

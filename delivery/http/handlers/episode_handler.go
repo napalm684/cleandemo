@@ -10,11 +10,11 @@ import (
 
 //EpisodeHandler handles http requests for episode related REST endpoints
 type EpisodeHandler struct {
-	interactor usecase.EpisodeInteractor
+	interactor usecase.EpisodeService
 }
 
 //NewEpisodeHandler Constructor
-func NewEpisodeHandler(interactor usecase.EpisodeInteractor) *EpisodeHandler {
+func NewEpisodeHandler(interactor usecase.EpisodeService) *EpisodeHandler {
 	return &EpisodeHandler{
 		interactor: interactor,
 	}

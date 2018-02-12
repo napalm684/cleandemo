@@ -5,13 +5,13 @@ import (
 	"github.com/stretchr/testify/mock"
 )
 
-//Episode repository mock
-type Episode struct {
+//EpisodeRepository repository mock
+type EpisodeRepository struct {
 	mock.Mock
 }
 
 //GetEpisodeByName - Retrieves episode details using given name
-func (episode *Episode) GetEpisodeByName(name string) (*episodeDomain.Episode, error) {
+func (episode *EpisodeRepository) GetEpisodeByName(name string) (*episodeDomain.Episode, error) {
 	args := episode.Called(name)
 
 	return args.Get(0).(*episodeDomain.Episode), args.Error(1)

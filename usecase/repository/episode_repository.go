@@ -2,7 +2,7 @@ package repository
 
 import episodeDomain "github.com/napalm684/cleandemo/domain/episode"
 
-// Episode Repository Interface
-type Episode interface {
+// EpisodeRepository Interface
+type EpisodeRepository interface {
 	GetEpisodeByName(name string) (*episodeDomain.Episode, error)
 }

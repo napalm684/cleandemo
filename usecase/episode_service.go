@@ -7,20 +7,20 @@ import (
 	"github.com/napalm684/cleandemo/usecase/repository"
 )
 
-//EpisodeInteractor provides consumer with the ability to work with episodes
-type EpisodeInteractor struct {
-	repository repository.Episode
+//EpisodeService provides consumer with the ability to work with episodes
+type EpisodeService struct {
+	repository repository.EpisodeRepository
 }
 
-//NewEpisodeInteractor returns
-func NewEpisodeInteractor(episodeRepository repository.Episode) *EpisodeInteractor {
-	return &EpisodeInteractor{
+//NewEpisodeService returns
+func NewEpisodeService(episodeRepository repository.EpisodeRepository) *EpisodeService {
+	return &EpisodeService{
 		repository: episodeRepository,
 	}
 }
 
 //GetEpisodeByName returns episode assigned to the given episode name
-func (episodeInteractor *EpisodeInteractor) GetEpisodeByName(name string) (*episodeDomain.Episode, error) {
+func (episodeInteractor *EpisodeService) GetEpisodeByName(name string) (*episodeDomain.Episode, error) {
 	episode, err := episodeInteractor.repository.GetEpisodeByName(name)
 
 	if err != nil {
