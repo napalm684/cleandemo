@@ -5,6 +5,7 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
+	"time"
 
 	"github.com/napalm684/cleandemo/delivery/http/handlers"
 	episodeDomain "github.com/napalm684/cleandemo/domain/episode"
@@ -19,7 +20,13 @@ func main() {
 }
 
 func setupServer() *http.Server {
-	srv := &http.Server{Addr: ":8888"}
+	srv := &http.Server{
+		Addr:           ":8888",
+		ReadTimeout:    time.Second * 15,
+		WriteTimeout:   time.Second * 30,
+		IdleTimeout:    time.Minute * 5,
+		MaxHeaderBytes: 1 << 20, //1048576 bytes
+	}
 
 	setupEpisodeHandlers()
 
